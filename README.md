@@ -1,2 +1,2 @@
 # hello-world
-Hello world new project template.
+bj project for cocos creator
