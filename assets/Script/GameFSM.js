@@ -9,6 +9,7 @@ var Deck = require('./deck')
 function GameFSM (){
 
     this.deck = new Deck();
+    this.players = new Set();
     this._fsm();
 
 
@@ -20,10 +21,17 @@ GameFSM.prototype.onReady = function()
     
 }
 
+
+GameFS
+
+
 GameFSM.prototype.onPending = function()
 {
     print('onPending')
 }
+
+
+
 
 GameFSM.prototype.onCheck = function()
 {
