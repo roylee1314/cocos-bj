@@ -14,7 +14,7 @@ var CardType = {
 
 
 function isValid(cards){
-    
+     
 }
 
 function getCardsType(cards){
@@ -23,8 +23,8 @@ function getCardsType(cards){
     }
 
     array = [cards[0].point, cards[1].point, cards[2].point];
-    array.sort();
-    array.reverse();
+    array.sort().reverse();
+    
 
     if (array[0] == array[1] == array[2]){
         return CardType.TRIP;
@@ -78,26 +78,6 @@ function compareTwoJinHua(c1, c2){
         }
     }
 
-
-    if (t1 == CardType.TRIP || t1 == CardType.STRAIGHT || t1 == CardType.HIGH_CARD)
-    {
-        for (i = 0; i < c1.length; i++){
-            if (c1[i].point != c2[i].point){
-                return c1[i] - c2[i]
-            }
-        }
-        for (i = 0; i < c1.length; i++){
-            if (c1[i].suit != c2[i].suit){
-                return c1[i] - c2[i]
-            }
-        }
-    }
-    if (t1 == CardType.STRAIGHT_FLUSH || t1 == CardType.FLUSH){
-        if (c1[0].point != c2[0].point){
-            return c1[0].point - c2.point;
-        }
-        return c1[0].suit - c2[0].suit;
-    }
     if (t1 == CardType.PAIR){
         var pair1, high1 = getPair(c1);
         var pair2, high2 = getPair(c2);
@@ -108,10 +88,61 @@ function compareTwoJinHua(c1, c2){
             return pair1 - pair2;
         }
     }
+    else
+    {
+        for (i = 0; i < c1.length; i++){
+            if (c1[i].point != c2[i].point){
+                return c1[i].point - c2[i].point;
+            }
+        }
+        for (i = 0; i < c1.length; i++){
+            if (c1[i].suit != c2[i].suit){
+                return c1[i].suit - c2[i].suit;
+            }
+        }
+    }
+    
+    
 
 
 
 }
 
-card0 = [{point:1,suit:1},{point:2,suit:1},{}]
-card1 = [{},{},{}]
+function bjAI(nineCards){
+    var cards = new Array(9);
+    var cur = 0;
+
+
+    // any trip?
+    nineCards = nineCards.sort(function(c0, c1){
+        if (c0.point != c0.point){
+            return c0.point - c1.point;
+        }
+        // for trip, suit does not matter
+        // we use the smaller suit
+        return c1.suit - c0.suit;
+    });
+    var i = 0;
+    while(i < nineCards.length)
+    {
+            
+    }    
+
+
+}
+
+
+
+
+
+
+
+
+// function ThreeCards(cards){
+//     this.cards = cards;
+//     this.cardType = null;
+    
+// }
+
+
+

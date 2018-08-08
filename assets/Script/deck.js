@@ -17,7 +17,7 @@ Deck.prototype.reset = function(){
 };
 
 Deck.prototype.draw = function () {
-    var cardIds = this._cardIds;
+    var cardIds = this._cards;
     var len = cardIds.length;
     if (len === 0) {
         return null;
@@ -36,3 +36,11 @@ Deck.prototype.draw = function () {
 };
 
 module.exports = Deck;
+
+// deck = new Deck();
+// console.log(deck._cards);
+// for(i = 0; i < 9; i ++){
+//     console.log(deck.draw());
+// }
+card = new Card(1, 1);
+console.log(card);
