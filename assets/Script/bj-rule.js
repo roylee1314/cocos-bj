@@ -6,10 +6,12 @@ var CardType = {
     INVALID: 1,
     HIGH_CARD: 2,
     PAIR: 3,
-    STRAIGHT: 4,
-    FLUSH: 5,
-    STRAIGHT_FLUSH: 6,
-    TRIP: 7,
+    STRAIGHT_A23: 4,
+    STRAIGHT: 5,
+    FLUSH: 6,
+    FLUSH_A23: 7,
+    STRAIGHT_FLUSH: 8,
+    TRIP: 9,
 };
 
 
@@ -30,7 +32,11 @@ function getCardsType(cards){
         return CardType.TRIP;
     }   
     if(cards[0].suit == cards[1].suit == cards[2].suit){
-        
+        if(array[0] == 13 && array[1] == 2 && array[2] == 1){
+            return CardType.FLUSH_A23;
+        }
+
+
         if (array[0] == array[1] + 1 == array[2] + 2){
             return CardType.STRAIGHT_FLUSH;
         }
@@ -38,7 +44,9 @@ function getCardsType(cards){
             return CardType.FLUSH;
         }
     }
-    
+    if(array[0] == 13 && array[1] == 2 && array[2] == 1){
+            return CardType.STRAIGHT_A23;
+        }
     if (array[0] == array[1] + 1 == array[2] + 2){
         return CardType.STRAIGHT;
     }
@@ -88,6 +96,7 @@ function compareTwoJinHua(c1, c2){
             return pair1 - pair2;
         }
     }
+
     else
     {
         for (i = 0; i < c1.length; i++){
@@ -151,57 +160,48 @@ function bjAI(nineCards){
         }
 
     };
-    var i = 0;
-    while (i < suits.length) {
-        if (suits[i].length > 3){
-            array = {}
+
+    // flush straight
+    
+    for(i = 0; i < suits.length; i++){
+        if (suits[i].length >= 3){
+            pdict = new Map();
             for(var j in suits[i]){
                 card = nineCards[suits[i][j]];
-                array.push(card);
+                pdict[card.point] = card;
             }
-           
-            for(var j = 13; j >= 0; j--){
-                for(var k in )
+            var p = 13;
+            while (p > 1){
+                if (pdict.has(p) && pdict.has(p - 1) && pdict.has(p - 2)){
+                    cards[pos++] = pdict[p];
+                    cards[pos++] = pdict[p - 1];
+                    cards[pos++] = pdict[p - 2];
+                    p -= 3;
+                    pdict.delete(p);
+                    pdictpdict.delete(p - 1);
+                    pdict.delete(p - 2);
+                }
+                else{
+                    p -= 1;
+                }
             }
+            // check A23
+            if (pdict.has(13) && (!pdict.has(12) or !pdict.has(11))
+                && pdict.has(1) && pdict.has(2)){
+                pdict[pos++] = pdict[3];
+                pdict[pos++] = pdict[2];
+                pdict[pos++] = pdict[13];
+            }    
+            
         }
+
 
 
     }
 
 
 
-    // find trip
-    // var i = 0;
-    // while(i < nineCards.length)
-    // {
-    //     if(nineCards[i] == null){
-    //         i++;
-    //         continue;
-    //     }
-    //     var card = nineCards[i];
-    //     var count = 0;
-    //     j = i + 1;
-    //     while (j < nineCards.length){
-    //         if (nineCards[j] != null && nineCards[j].point == card.point){
-    //             j ++;
-    //         }
-    //         else{
-    //             break;
-    //         }
-    //     }
-    //     if (count >= 3){
-    //         for (c = 0; c < 3; c++){
-    //             cards[pos++] = nineCards[i];
-    //             nineCards[i++] = null;
-    //         }
-            
-    //     }else{
-    //         i = j;
-    //     }
-
-    // }
-
-    //find
+    
 
 
 }
